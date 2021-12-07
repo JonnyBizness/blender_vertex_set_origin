@@ -15,9 +15,7 @@ class ObjectSetOrigin(bpy.types.Operator):
     """Object Origin by Vertices"""      # Use this as a tooltip for menu items and buttons.
     bl_idname = "object.vertex_set_origin"        # Unique identifier for buttons and menu items to reference.
     bl_label = "Move objects origin to selected vertices"         # Display name in the interface.
-    bl_options = {'REGISTER', 'UNDO'}  # Enable undo for the operator.
-
-    total: bpy.props.IntProperty(name="Total", default=4)
+    bl_options = {'REGISTER', 'UNDO'}  # Enable undo for the operator.    
 
     def execute(self, context):        # execute() is called when running the operator.
 
@@ -80,8 +78,6 @@ def register():
     wm = bpy.context.window_manager
     km = wm.keyconfigs.addon.keymaps.new(name='Screen Editing', space_type='EMPTY')
     kmi = km.keymap_items.new(ObjectSetOrigin.bl_idname, 'F5', 'PRESS', ctrl=False, shift=False)
-    kmi.properties.total = 4
-
     addon_keymaps.append((km, kmi))
 
 def unregister():
@@ -91,9 +87,3 @@ def unregister():
     for km, kmi in addon_keymaps:
         km.keymap_items.remove(kmi)
     addon_keymaps.clear()
-
-
-# This allows you to run the script directly from Blender's Text editor
-# to test the add-on without having to install it.
-#if __name__ == "__main__":
-#    register()
